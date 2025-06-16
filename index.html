@@ -6,6 +6,7 @@
   <title>ZeroGravity Photography</title>
   <link rel="icon" type="image/x-icon" href="assests/logo-zerogravity.webp">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
   <style>
     .text-stroke {
       -webkit-text-stroke: 1px white;
@@ -65,6 +66,23 @@
       transform: translateY(-5px);
       filter: brightness(1) invert(0);
     }
+    .glass-timer-digit {
+  position: relative;
+  width: 3rem; /* Adjust as needed */
+  height: 4rem; /* Adjust as needed */
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glass-timer-digit svg text {
+  font-family: monospace;
+  font-weight: bold;
+}
     /* Mobile-specific styles */
     @media (max-width: 767px) {
       .mobile-qr-container {
@@ -210,8 +228,26 @@
     <div class="flex justify-center space-x-3 md:space-x-4">
       <!-- Hours -->
       <div class="flex flex-col items-center">
-        <div class="glass-timer-digit">
-          <span id="countdown-hours" class="text-2xl md:text-3xl font-bold font-mono">24</span>
+        <div class="glass-timer-digit relative h-16 md:h-20 w-12 md:w-16 overflow-hidden">
+          <svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="hourGradient" gradientUnits="userSpaceOnUse" x1="50" y1="0" x2="50" y2="100">
+                <stop offset="0%" stop-color="#000000"/>
+                <stop offset="25%" stop-color="#fff"/>
+                <stop offset="75%" stop-color="#fff"/>
+                <stop offset="100%" stop-color="#000000"/>
+              </linearGradient>
+              <mask id="hourMask">
+                <rect x="0" y="0" width="100" height="100" fill="url(#hourGradient)" />  
+              </mask>
+            </defs> 
+            <rect x="0" y="0" width="100" height="100" fill="#000" />
+            <g mask="url(#hourMask)"> 
+              <rect x="0" y="0" width="100" height="100" fill="#444" />
+              <text id="hours0" x="50" y="75" text-anchor="middle" font-size="80" fill="#fff">24</text>
+              <text id="hours1" x="50" y="-25" text-anchor="middle" font-size="80" fill="#fff">24</text>
+            </g>
+          </svg>
         </div>
         <span class="text-xs text-gray-400 mt-2">HOURS</span>
       </div>
@@ -223,8 +259,26 @@
       
       <!-- Minutes -->
       <div class="flex flex-col items-center">
-        <div class="glass-timer-digit">
-          <span id="countdown-minutes" class="text-2xl md:text-3xl font-bold font-mono">00</span>
+        <div class="glass-timer-digit relative h-16 md:h-20 w-12 md:w-16 overflow-hidden">
+          <svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="minuteGradient" gradientUnits="userSpaceOnUse" x1="50" y1="0" x2="50" y2="100">
+                <stop offset="0%" stop-color="#000000"/>
+                <stop offset="25%" stop-color="#fff"/>
+                <stop offset="75%" stop-color="#fff"/>
+                <stop offset="100%" stop-color="#000000"/>
+              </linearGradient>
+              <mask id="minuteMask">
+                <rect x="0" y="0" width="100" height="100" fill="url(#minuteGradient)" />  
+              </mask>
+            </defs> 
+            <rect x="0" y="0" width="100" height="100" fill="#000" />
+            <g mask="url(#minuteMask)"> 
+              <rect x="0" y="0" width="100" height="100" fill="#444" />
+              <text id="minutes0" x="50" y="75" text-anchor="middle" font-size="80" fill="#fff">00</text>
+              <text id="minutes1" x="50" y="-25" text-anchor="middle" font-size="80" fill="#fff">00</text>
+            </g>
+          </svg>
         </div>
         <span class="text-xs text-gray-400 mt-2">MINUTES</span>
       </div>
@@ -236,8 +290,26 @@
       
       <!-- Seconds -->
       <div class="flex flex-col items-center">
-        <div class="glass-timer-digit">
-          <span id="countdown-seconds" class="text-2xl md:text-3xl font-bold font-mono">00</span>
+        <div class="glass-timer-digit relative h-16 md:h-20 w-12 md:w-16 overflow-hidden">
+          <svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="secondGradient" gradientUnits="userSpaceOnUse" x1="50" y1="0" x2="50" y2="100">
+                <stop offset="0%" stop-color="#000000"/>
+                <stop offset="25%" stop-color="#fff"/>
+                <stop offset="75%" stop-color="#fff"/>
+                <stop offset="100%" stop-color="#000000"/>
+              </linearGradient>
+              <mask id="secondMask">
+                <rect x="0" y="0" width="100" height="100" fill="url(#secondGradient)" />  
+              </mask>
+            </defs> 
+            <rect x="0" y="0" width="100" height="100" fill="#000" />
+            <g mask="url(#secondMask)"> 
+              <rect x="0" y="0" width="100" height="100" fill="#444" />
+              <text id="seconds0" x="50" y="75" text-anchor="middle" font-size="80" fill="#fff">00</text>
+              <text id="seconds1" x="50" y="-25" text-anchor="middle" font-size="80" fill="#fff">00</text>
+            </g>
+          </svg>
         </div>
         <span class="text-xs text-gray-400 mt-2">SECONDS</span>
       </div>
